@@ -1,0 +1,36 @@
+# Compiled object files
+*.o
+
+# Compiled binary
+engine
+
+# Build directory
+build/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+*.bak
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE and editor files
+.vscode/
+.idea/
+*.code-workspace
+*.iml
+
+# Backup files
+*.old
+*.orig
+
+# Lua cache (if any)
+*.luac
+
+# ImGui-specific generated files (if you use ImGui's utilities)
+libs/imgui/misc/fonts/binary_to_compressed_c.cpp
+
