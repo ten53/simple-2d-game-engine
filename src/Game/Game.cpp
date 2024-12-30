@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "../Logger/Logger.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <glm/glm.hpp>
@@ -7,18 +8,18 @@
 
 Game::Game() {
     isRunning = false;
-    std::cout << "Game constructor called." << std::endl;
+    Logger::Log("Game constructor called.");
 }
 
 
 Game::~Game() {
-    std::cout << "Game destructor called."  << std::endl;
+    Logger::Log("Game destructor called.");
 }
 
 
 void Game::Initialize() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-    std::cerr << "Error initializing SDL: " << SDL_GetError() << std::endl;
+        Logger::Err("Error initializing SDL");
         return;
     }
 
@@ -35,7 +36,7 @@ void Game::Initialize() {
             SDL_WINDOW_BORDERLESS);
 
     if (!window) {
-        std::cerr << "Error creating SDL window: " << SDL_GetError() << std::endl;
+        Logger::Log("Error creating SDL window");
         SDL_Quit();
         return;
     }
@@ -46,7 +47,7 @@ void Game::Initialize() {
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
     if (!renderer) {
-        std::cerr << "Error creating SDL renderer: " << SDL_GetError() << std::endl;
+        Logger::Log("Error creating SDL renderer");
         SDL_DestroyWindow(window);
         SDL_Quit();
         return;
@@ -86,16 +87,16 @@ void Game::Setup() {
 
 
 void Game::Update() {
-    // capping frame rate
+    // Capping frame rate
     int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPrevFrame);
     if (timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME) {
         SDL_Delay(timeToWait);
     }
 
-    // difference is ticks since last frame converted to seconds
+    // Difference is ticks since last frame converted to seconds
     double deltaTime = (SDL_GetTicks() - static_cast<double>(millisecsPrevFrame)) / 1000.0;
 
-    // save previous frame rate
+    // Save previous frame rate
     millisecsPrevFrame = SDL_GetTicks();
 
     playerPosition.x += playerVelocity.x * deltaTime;
@@ -107,7 +108,7 @@ void Game::Render() {
     SDL_SetRenderDrawColor(renderer, 21, 21, 21, 255);
     SDL_RenderClear(renderer);
 
-    // render png texture
+    // Render png texture
     SDL_Surface* surface = IMG_Load("./assets/images/tank-tiger-right.png");
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     SDL_FreeSurface(surface);

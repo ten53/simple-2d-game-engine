@@ -1,9 +1,26 @@
+##### Variables #####
+CC = g++
+LANG_STD = -std=c++17
+COMPILER_FLAGS = -Wall -Wfatal-errors
+INLCUDE_PATH = -I"./libs"
+SRC_FILES = src/*.cpp 			\
+			src/Game/*.cpp 		\
+			src/Logger/*.cpp
+LINKER_FLAGS =  -lSDL2 			\
+				-lSDL2_image 	\
+				-lSDL2_mixer 	\
+				-lSDL2_ttf		\
+				-llua
+OBJ_NAME = engine
+
+
+##### Rules #####
 build:
-	g++ -Wall -std=c++17 src/*.cpp -I"./libs" -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -llua -o engine
+	$(CC) $(COMPILER_FLAGS) $(LANG_STD) $(INCLUDE_PATH) $(SRC_FILES) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
 run:
-	./engine
+	./$(OBJ_NAME)
 
 clean:
-	rm engine
+	rm $(OBJ_NAME)
 
