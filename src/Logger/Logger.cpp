@@ -27,7 +27,7 @@ std::string Logger::LocalTime() {
 void Logger::Log(const std::string& message) {
     std::lock_guard<std::mutex> guard(logMutex);
     std::cout << "\033[32m" // Green color
-              << "LOG: [" << LocalTime() << "] - " << message
+              << "LOG > [" << LocalTime() << "] - " << message
               << "\033[0m"  // Reset color
               << std::endl;
 }
@@ -35,7 +35,7 @@ void Logger::Log(const std::string& message) {
 void Logger::Err(const std::string& message) {
     std::lock_guard<std::mutex> guard(logMutex);
     std::cerr << "\033[31m" // Red color
-              << "ERROR: [" << LocalTime() << "] - " << message
+              << "ERROR > [" << LocalTime() << "] - " << message
               << "\033[0m"  // Reset color
               << std::endl;
 }
@@ -43,7 +43,7 @@ void Logger::Err(const std::string& message) {
 void Logger::Warn(const std::string& message) {
     std::lock_guard<std::mutex> guard(logMutex);
     std::cout << "\033[33m" // Yellow for WARNING
-              << "WARNING: [" << LocalTime() << "] - " << message
+              << "WARNING > [" << LocalTime() << "] - " << message
               << "\033[0m"  // Reset
               << std::endl;
 }

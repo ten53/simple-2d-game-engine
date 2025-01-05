@@ -1,5 +1,4 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#pragma once
 
 #include <string>
 #include <mutex>
@@ -15,5 +14,4 @@ private:
     static std::mutex logMutex; // To ensure thread safety
 };
 
-#endif
 
